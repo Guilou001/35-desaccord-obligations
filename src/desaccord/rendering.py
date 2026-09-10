@@ -152,7 +152,7 @@ def compile_article(repo: str) -> None:
             {
                 "source": "ARTICLE.md",
                 "sha256": hashlib.sha256(Path("ARTICLE.md").read_bytes()).hexdigest(),
-                "equations": "docs/equations.json",
+                "equations": "docs/equations.json" if Path("docs/equations.json").exists() else None,
             },
             indent=2,
         )

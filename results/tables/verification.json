@@ -14,7 +14,7 @@
     "src/desaccord/inference.py": "8e8cb1e4d37f3bb734545d216cf9d94f0d41860f3028c7d681160a0dd4ed4e20",
     "src/desaccord/portfolio.py": "d097e8affd488b6a4210b59dfec7da2959d8c01e016d2e2534dbf66ffc5c4e41",
     "src/desaccord/publication.py": "2d6cacb348ce5ae8fb0684dde5116b01e1faaf0dfc7bc570bcf3514d078ee2e6",
-    "src/desaccord/rendering.py": "4bc9450e9e4ed889d2c99871d9f9c374fa8a4fc4f179976151cc828e966c599f",
+    "src/desaccord/rendering.py": "3505f0913bd41e3b3ff9d084e013235cc7163453bc9efb939e24959b9dcb7028",
     "src/desaccord/selection.py": "a64d5e21d10c1cdad1941a1a0d3671c6e73fe41850e0666c9a266dded20da87e",
     "src/desaccord/selection_extension.py": "3b6b14c17c5bab67f2ddd6da9c08500e33fa8c8c5ef01cbe266bf4a0b048e3ff",
     "src/desaccord/selection_publication.py": "baf1be39af31d2967a724742810ac9fe7a0f3356c0d1d75f7d9ce3e6d91af9c2",

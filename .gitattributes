@@ -2,6 +2,9 @@
 *.parquet binary
 *.xlsx binary
 *.png binary
-*.svg text eol=lf
+*.svg text eol=lf linguist-generated=true -whitespace
 *.py text eol=lf
 *.md text eol=lf
+results/** linguist-generated=true
+rapport/** linguist-generated=true
+reports/** linguist-generated=true

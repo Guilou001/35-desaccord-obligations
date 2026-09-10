@@ -2,7 +2,7 @@
 
 Guillaume Vaudescal
 
-Document de recherche, version 1.0 du 10 septembre 2026. Le protocole a été consigné dans le premier commit local avant le calcul des performances.
+Document de recherche, version 1.1 du 10 septembre 2026. Le protocole de l’étude initiale est conservé dans son premier commit local. L’extension et ses limites sont décrites séparément.
 
 ## Résumé
 
