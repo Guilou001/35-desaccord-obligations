@@ -1,0 +1,11 @@
+{
+  "engine": "@oai/artifact-tool",
+  "delta_ce": -0.008667005682390427,
+  "months": 209,
+  "ce": [
+    0.01799023989191209,
+    0.02665724557430252
+  ],
+  "risk_aversion_change_verified": true,
+  "native_excel_opened": false
+}

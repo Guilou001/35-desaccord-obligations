@@ -1,0 +1,8 @@
+*.pdf binary
+*.png binary
+*.xlsx binary
+*.parquet binary
+*.svg linguist-generated=true -whitespace
+results/** linguist-generated=true
+rapport/** linguist-generated=true
+reports/** linguist-generated=true

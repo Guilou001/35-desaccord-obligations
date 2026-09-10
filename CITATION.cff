@@ -4,6 +4,8 @@ title: "Mesurer quand le désaccord des modèles aide à choisir des obligations
 authors:
   - family-names: Vaudescal
     given-names: Guillaume
-version: 0.1.0
+version: 1.0.0
 license: MIT
 url: "https://github.com/Guilou001/35-desaccord-obligations"
+date-released: 2026-09-10
+repository-code: "https://github.com/Guilou001/35-desaccord-obligations"

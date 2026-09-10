@@ -2,7 +2,7 @@
 
 Les modèles qui se contredisent font davantage d'erreurs. Pourtant, pénaliser systématiquement leur désaccord dégrade ici le portefeuille construit avec leur prévision moyenne.
 
-Sur 209 mois, l'écart de rendement certain équivalent net atteint -0,87 point de pourcentage par an. Son intervalle à 95 % va de -1,56 à -0,13.
+Sur {{months}} mois, l'écart de rendement certain équivalent net atteint {{delta_ce}} point de pourcentage par an. Son intervalle à 95 % va de {{ci_low}} à {{ci_high}}.
 
 [Lire l'article](ARTICLE.md) · [Télécharger le PDF](rapport/rapport.pdf) · [Lire le protocole](docs/PROTOCOLE.md) · [Examiner les résultats](results/tables)
 
@@ -18,17 +18,11 @@ L'étude fait cette comparaison sur les prévisions publiques de Dickerson, Noza
 
 ## Ce que les résultats montrent
 
-Dans le groupe de faible désaccord, l'erreur absolue moyenne vaut 1,54 % par mois. Elle atteint 2,50 % dans le groupe de fort désaccord.
+Dans le groupe de faible désaccord, l'erreur absolue moyenne vaut {{mae_low}} % par mois. Elle atteint {{mae_high}} % dans le groupe de fort désaccord.
 
 Le désaccord apporte encore une petite information après contrôle de la volatilité et des erreurs passées. Cette information ne suffit pas à améliorer notre règle de portefeuille.
 
-| Classement | Rendement annuel (%) | Risque annuel (%) | Équivalent certain (% par an) | Rotation annuelle |
-| --- | --- | --- | --- | --- |
-| Prévision moyenne | 4,80 | 6,79 | 2,67 | 9,95 |
-| Désaccord pénalisé | 3,84 | 6,56 | 1,80 | 11,34 |
-| Erreurs passées pénalisées | 4,02 | 5,27 | 2,27 | 11,86 |
-| Volatilité passée pénalisée | 3,96 | 5,31 | 2,21 | 11,80 |
-| Toutes les obligations admissibles | 3,26 | 5,79 | 1,42 | 0,72 |
+{{performance_table}}
 
 Les coûts valent vingt-cinq points de base par montant acheté ou vendu. La rotation annuelle est la somme des achats et ventes, exprimée en multiples du capital.
 
@@ -44,11 +38,11 @@ Le classement pénalisant le désaccord échange davantage de titres. Il perd d�
 | Erreur passée | Distance historique entre prévision et résultat | Moyenne sur les douze mois précédents |
 | Volatilité | Fluctuations historiques du rendement | Écart type sur les douze mois précédents |
 
-Un placebo redistribue le désaccord entre obligations comparables. La variable observée fait mieux que ses 99 redistributions, mais reste derrière la prévision moyenne seule. Elle contient donc une information qui n'améliore pas automatiquement la décision retenue.
+Un placebo redistribue le désaccord entre obligations comparables. La variable observée fait mieux que ses {{placebo_count}} redistributions, mais reste derrière la prévision moyenne seule. Elle contient donc une information qui n'améliore pas automatiquement la décision retenue.
 
 ## Les vérifications et la limite principale
 
-L'audit porte sur 29 787 291 lignes et 245 mois de signal. Il vérifie les clés uniques, les dates, les rendements communs aux modèles et la moyenne des ensembles.
+L'audit porte sur {{n_rows}} lignes et {{n_dates}} mois de signal. Il vérifie les clés uniques, les dates, les rendements communs aux modèles et la moyenne des ensembles.
 
 Le fichier associe déjà chaque prévision à son rendement du mois suivant. Aucun décalage supplémentaire n'est appliqué. Les variables historiques sont calculées en SQL avant la date du signal.
 

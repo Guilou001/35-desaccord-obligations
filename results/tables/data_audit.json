@@ -1,0 +1,11 @@
+{
+  "n_rows": 29787291,
+  "n_dates": 245,
+  "n_bonds": 19773,
+  "bad_dates": 0,
+  "bad_values": 0,
+  "duplicate_keys": 0,
+  "inconsistent_returns": 0,
+  "incomplete_models": 0,
+  "ensemble_max_error": 7.450580596923828e-09
+}

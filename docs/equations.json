@@ -1,0 +1,7 @@
+{
+  "\\bar\\mu_{i,t}=\\frac{1}{6}\\sum_{m=1}^{6}\\hat\\mu_{i,t}^{(m)},\\qquad d_{i,t}=\\sqrt{\\frac{1}{5}\\sum_{m=1}^{6}(\\hat\\mu_{i,t}^{(m)}-\\bar\\mu_{i,t})^2}": "overline(mu)_(i,t)=1/6 sum_(m=1)^6 hat(mu)_(i,t)^((m)), quad d_(i,t)=sqrt(1/5 sum_(m=1)^6 (hat(mu)_(i,t)^((m))-overline(mu)_(i,t))^2)",
+  "s_{i,t}=\\operatorname{rang}_t(\\bar\\mu_{i,t})-\\frac{1}{2}\\operatorname{rang}_t(d_{i,t})": "s_(i,t)=op(\"rang\")_(t) (overline(mu)_(i,t))-1/2 op(\"rang\")_(t) (d_(i,t))",
+  "k_t=1-c\\sum_i|k_t w_{i,t}-b_{i,t}|": "k_t=1-c sum_i abs(k_t w_(i,t)-b_(i,t))",
+  "\\operatorname{rang}_t(|r_{i,t+1}-\\bar\\mu_{i,t}|)=a_t+b_t\\operatorname{rang}_t(d_{i,t})+\\theta_t^{\\top}C_{i,t}+u_{i,t+1}": "op(\"rang\")_(t) (abs(r_(i,t+1)-overline(mu)_(i,t)))=a_t+b_t op(\"rang\")_(t) (d_(i,t))+theta_t^T C_(i,t)+u_(i,t+1)",
+  "CE_\\gamma=12\\bar r-6\\gamma s_r^2,\\qquad \\gamma=5": "C E_gamma=12 overline(r)-6 gamma s_r^2, quad gamma=5"
+}

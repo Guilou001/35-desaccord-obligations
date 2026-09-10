@@ -1,0 +1,22 @@
+{
+  "status": "descriptive_post_test",
+  "score": "sharpe",
+  "months": 209,
+  "variants": 5,
+  "pbo": 0.35714285714285715,
+  "partitions": 70,
+  "best_ratio_model": "past_error",
+  "dsr_sensitivity": [
+    {
+      "assumed_independent_trials": 2,
+      "monthly_threshold": 0.012114473930024778,
+      "dsr": 0.9718984559433845
+    },
+    {
+      "assumed_independent_trials": 5,
+      "monthly_threshold": 0.027797018526851233,
+      "dsr": 0.9564160501497395
+    }
+  ],
+  "limitation": "Blocs historiques r\u00e9arrang\u00e9s et essais corr\u00e9l\u00e9s. Aucun r\u00e9entra\u00eenement dans CSCV. Le DSR ignore la d\u00e9pendance temporelle."
+}
