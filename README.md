@@ -1,6 +1,6 @@
 # Faut-il éviter les obligations sur lesquelles les modèles hésitent ?
 
-Les modèles qui se contredisent font davantage d'erreurs. Pourtant, pénaliser systématiquement leur désaccord dégrade ici le portefeuille construit avec leur prévision moyenne.
+Dans les données étudiées, les modèles se trompent davantage sur les obligations dont les prévisions divergent. Pourtant, pénaliser systématiquement leur désaccord dégrade ici le portefeuille construit avec leur prévision moyenne.
 
 Sur 209 mois, l'écart de rendement certain équivalent net atteint -0,87 point de pourcentage par an. Son intervalle à 95 % va de -1,56 à -0,13.
 
@@ -9,6 +9,8 @@ Sur 209 mois, l'écart de rendement certain équivalent net atteint -0,87 point 
 ![Les obligations sont réparties chaque mois en cinq groupes. Plus les modèles divergent, plus leurs erreurs sont grandes. Ces obligations sont aussi plus volatiles et rapportent davantage avant coûts.](results/figures/desaccord_erreur.png)
 
 ## La question en quelques mots
+
+Une obligation est une dette que l’on peut acheter et revendre. Son rendement dépend notamment des intérêts reçus et des variations de son prix.
 
 Six modèles donnent chacun une prévision pour la même obligation. Leur moyenne résume le rendement attendu. Leur désaccord indique à quel point leurs réponses diffèrent.
 
@@ -30,7 +32,9 @@ Le désaccord apporte encore une petite information après contrôle de la volat
 | Volatilité passée pénalisée | 3,96 | 5,31 | 2,21 | 11,80 |
 | Toutes les obligations admissibles | 3,26 | 5,79 | 1,42 | 0,72 |
 
-Les coûts valent vingt-cinq points de base par montant acheté ou vendu. La rotation annuelle est la somme des achats et ventes, exprimée en multiples du capital.
+L’équivalent certain retranche une pénalité de risque au rendement moyen au-delà du taux sans risque. Il sert à comparer ce qu’un rendement rapporte avec les fluctuations qu’il impose.
+
+Les coûts valent vingt-cinq points de base par montant acheté ou vendu, soit 25 cents pour 100 dollars échangés. La rotation annuelle est la somme des achats et ventes, exprimée en multiples du capital.
 
 Le classement pénalisant le désaccord échange davantage de titres. Il perd déjà une partie du rendement certain équivalent avant frais, puis subit davantage de coûts.
 
