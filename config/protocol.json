@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "frozen_date": "2026-09-10",
+  "primary_target": "retxrf",
+  "signal_start": "2005-07-31",
+  "signal_end": "2022-11-30",
+  "base_models": ["lasso", "ridge", "elastic_net", "neural_net", "extra_trees", "random_forest"],
+  "top_fraction": 0.20,
+  "penalty": 0.5,
+  "history_months": 12,
+  "minimum_history": 6,
+  "risk_window": 24,
+  "annual_risk_budget": 0.06,
+  "risk_aversion": 5.0,
+  "costs_bps": [0, 10, 25, 50, 100],
+  "primary_cost_bps": 25,
+  "primary_model": "disagreement",
+  "primary_benchmark": "mean",
+  "bootstrap_repetitions": 4999,
+  "bootstrap_blocks": [6, 12, 24],
+  "seed": 20260910,
+  "permutation_repetitions": 99
+}

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Citer ce dépôt et les articles mentionnés dans sa bibliographie."
+title: "Mesurer quand le désaccord des modèles aide à choisir des obligations"
+authors:
+  - family-names: Vaudescal
+    given-names: Guillaume
+version: 0.1.0
+license: MIT
+url: "https://github.com/Guilou001/35-desaccord-obligations"

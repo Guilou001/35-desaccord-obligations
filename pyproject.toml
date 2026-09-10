@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gv-desaccord"
+version = "0.1.0"
+description = "Mesurer quand le désaccord des modèles aide à choisir des obligations"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+authors = [{name = "Guillaume Vaudescal"}]
+dependencies = ["numpy>=2.0", "pandas>=3.0", "scipy>=1.14", "matplotlib>=3.9", "pyarrow>=17", "duckdb>=1.1", "typer>=0.12", "pooch>=1.8", "truststore>=0.10"]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.12", "scikit-learn>=1.5", "pre-commit>=4"]
+report = ["typst>=0.14", "pypdf>=5", "pymupdf>=1.25"]
+
+[project.scripts]
+desaccord = "desaccord.cli:app"
+
+[project.urls]
+Repository = "https://github.com/Guilou001/35-desaccord-obligations"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/desaccord"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501", "B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
