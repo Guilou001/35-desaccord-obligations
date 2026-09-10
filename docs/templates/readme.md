@@ -54,6 +54,18 @@ Nous n'avons pas l'univers des obligations avant les filtres des auteurs. Le ré
 
 Les frais sont hypothétiques. Les délais d'exécution et les fourchettes acheteur-vendeur ne sont pas observés dans ce fichier mensuel.
 
+## Nouvelle expérience sur les intervalles après sélection
+
+Une fourchette annoncée à 90 % devrait contenir environ neuf rendements sur dix. Nous vérifions ce qui se passe après avoir choisi les obligations les mieux classées.
+
+Avec une largeur liée au désaccord et une calibration sur tous les titres, la couverture vaut {{coverage_all}} % dans l'univers et {{coverage_selected}} % parmi les titres sélectionnés. Recalibrer sur les seuls titres sélectionnés donne {{coverage_recalibrated}} %. **Cette adaptation ne corrige donc pas automatiquement la couverture.**
+
+![Couverture annoncée et réalisée des intervalles après sélection](results/figures/calibration_selection.png)
+
+L'extension compare aussi trois filtres d'exposition et un classement inspiré d'Uncertainty-Aware Asset Pricing. Les résultats, la méthode et les limites figurent dans l'article et dans [le protocole de l'extension](docs/EXTENSION_SELECTION.md). Le [classeur](reports/selection.xlsx) permet de retrouver l'écart de couverture mois par mois.
+
+La commande `uv run desaccord selection` recalcule cette extension. Elle utilise la période déjà examinée et reste exploratoire.
+
 ## Reproduire
 
 ```bash
@@ -61,6 +73,7 @@ uv sync --all-groups --locked
 uv run desaccord fetch
 uv run pytest
 uv run desaccord run
+uv run desaccord selection
 uv run desaccord verify
 uv run --group report desaccord report
 ```

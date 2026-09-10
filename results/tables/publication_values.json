@@ -28,5 +28,13 @@
   "eligible_max": "5 584",
   "pbo": "35,7",
   "bootstrap_table": "| Bloc en mois | Écart annuel | Borne basse à 95 % | Borne haute à 95 % |\n| --- | --- | --- | --- |\n| 6 | -0,87 | -1,62 | -0,07 |\n| 12 | -0,87 | -1,56 | -0,13 |\n| 24 | -0,87 | -1,50 | -0,26 |",
-  "target_table": "| Cible | Pente du désaccord | Borne basse | Borne haute |\n| --- | --- | --- | --- |\n| Rendement total excédentaire | 0,020 | 0,006 | 0,034 |\n| Rendement de crédit | 0,043 | 0,025 | 0,058 |\n| Crédit normalisé par duration et écart | 0,013 | 0,003 | 0,023 |"
+  "target_table": "| Cible | Pente du désaccord | Borne basse | Borne haute |\n| --- | --- | --- | --- |\n| Rendement total excédentaire | 0,020 | 0,006 | 0,034 |\n| Rendement de crédit | 0,043 | 0,025 | 0,058 |\n| Crédit normalisé par duration et écart | 0,013 | 0,003 | 0,023 |",
+  "coverage_gap": "2,21",
+  "coverage_low": "0,71",
+  "coverage_high": "3,60",
+  "coverage_all": "87,77",
+  "coverage_selected": "89,98",
+  "coverage_recalibrated": "87,19",
+  "filters_table": "| Règle | Part risquée moyenne (%) | Risque annuel (%) | Équivalent certain annuel (%) |\n| --- | --- | --- | --- |\n| Filtre d’erreurs passées | 83,66 | 6,43 | 1,67 |\n| Sélection sans filtre | 81,80 | 6,79 | 2,67 |\n| Filtre de largeur des intervalles | 84,09 | 6,55 | 1,66 |\n| Filtre de volatilité | 83,72 | 6,47 | 1,41 |",
+  "uas_table": "| Classement du décile acheté | Risque annuel (%) | Équivalent certain annuel (%) |\n| --- | --- | --- |\n| Prévision moyenne | 7,42 | 2,94 |\n| Moyenne + quantile à 1 % | 7,73 | 2,32 |\n| Moyenne + quantile à 5 % | 7,84 | 2,16 |\n| Moyenne + quantile à 10 % | 7,96 | 1,62 |"
 }

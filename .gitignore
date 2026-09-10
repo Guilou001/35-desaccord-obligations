@@ -10,3 +10,8 @@ data/
 .env.*
 !.env.example
 .tmp/
+
+*.log
+*.partial.csv
+
+*.inspect.ndjson

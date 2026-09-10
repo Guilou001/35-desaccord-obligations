@@ -198,5 +198,8 @@ def publish() -> None:
             ],
         ),
     }
+    from .selection_publication import extension_values
+
+    vals.update(extension_values())
     templates(vals)
     compile_article("35-desaccord-obligations")

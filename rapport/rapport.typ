@@ -7,7 +7,7 @@
   footer: context [
     #set text(size: 8pt, fill: luma(90))
     #grid(columns: (1fr, auto), align: (left, right),
-      [Document de recherche · Version 1.0], [#counter(page).display("1 / 1", both: true)])
+      [Document de recherche · Version 1.1], [#counter(page).display("1 / 1", both: true)])
   ],
 )
 #set text(font: ("Libertinus Serif", "Times New Roman", "DejaVu Serif"), size: 10.5pt, lang: "fr")
@@ -23,7 +23,7 @@
   text(style: "italic", fill: luma(45), it.body))
 // la table NE DOIT PAS être enfermée dans un par() : Typst 0.15 la supprime alors
 // entièrement, sans erreur. Le réglage se pose donc dans la portée du bloc.
-#show table: it => block(above: 1.1em, below: 1.1em,
+#show table: it => block(breakable: false, above: 1.1em, below: 1.1em,
   [#set par(justify: false); #text(size: 8.8pt, it)])
 #show figure: it => block(above: 1.4em, below: 1.4em, it)
 #show figure.caption: it => text(size: 8.5pt, fill: luma(70), it)
@@ -31,7 +31,7 @@
 
 #align(center)[
   #block(width: 100%)[
-    #text(size: 18pt, weight: "bold")[Désaccord des modèles et choix d'obligations]
+    #text(size: 18pt, weight: "bold", hyphenate: false)[Désaccord des modèles et choix d'obligations]
     #v(0.6em)
     #text(size: 10pt, fill: luma(70))[Guillaume Vaudescal · 10 septembre 2026 · #link("https://github.com/Guilou001/35-desaccord-obligations")[Guilou001/35-desaccord-obligations]]
   ]
@@ -334,6 +334,113 @@ L'archive et les calculs propres au dépôt sont mesurés. Les frais, les liquid
 Le SQL, les tests, toutes les variantes prévues et les résultats mensuels des portefeuilles sont disponibles. Les données individuelles brutes restent locales. Le PDF est produit depuis cet article.
 
 L'assistance d'IA a servi au code et à la rédaction. Les contrôles indépendants sont documentés. Le document n'a pas été évalué par les pairs.
+
+== Extension de septembre 2026 — Les intervalles restent-ils valables après sélection ?
+
+L'étude principale montre qu'une information sur les erreurs ne garantit pas une meilleure sélection. L'extension examine une autre utilisation du désaccord. Peut-il servir à construire des intervalles prédictifs fiables pour les titres effectivement achetés ? Une couverture globale correcte pourrait cacher une couverture différente dans le groupe choisi.
+
+Le protocole est fixé avant les calculs de cette extension, mais la période avait déjà été examinée dans l'étude principale. Il s'agit donc d'une analyse exploratoire, sans nouvelle période indépendante. Le rendement cible, les six prévisions publiées et les conditions d'admissibilité restent les mêmes.
+
+=== Construire les fourchettes avec le passé disponible
+
+Chaque intervalle est centré sur la moyenne des six prévisions. Sa demi-largeur est le produit d'un quantile historique d'erreur normalisée et d'une échelle courante. Nous comparons une échelle constante, le désaccord, l'erreur absolue passée et la volatilité passée. Les échelles variables ont un plancher de 0,0001 en rendement décimal.
+
+La calibration utilise les 24 mois précédents, avec au moins douze mois disponibles. Chaque mois reçoit le même poids. À l'intérieur d'un mois, les obligations se partagent ce poids. Les niveaux annoncés sont 50, 80, 90 et 95 %. Le quantile pondéré est une statistique d'ordre empirique, pas une garantie conforme de couverture finie.
+
+Deux ensembles de calibration sont comparés. Le premier emploie tous les titres admissibles. Le second utilise les titres qui avaient été sélectionnés à leur propre date historique, dans le quintile supérieur des prévisions moyennes. Aucun classement n'est refait avec une prévision future. Les deux calibrations sont ensuite évaluées sur l'univers et sur les titres actuellement sélectionnés.
+
+Ces fourchettes concernent le rendement qui sera réalisé. Elles ne sont pas des intervalles de confiance sur le rendement moyen attendu. La dépendance des obligations et les changements de distribution empêchent d'invoquer automatiquement une garantie d'échangeabilité.
+
+=== Le résultat contredit l'hypothèse de sous-couverture après sélection
+
+Avec une largeur liée au désaccord et une calibration générale, la couverture annoncée à 90 % est réalisée à 87,77 % sur tous les titres. Elle atteint 89,98 % dans le quintile sélectionné. L'écart sélection moins univers vaut 2,21 points de pourcentage, avec un intervalle à 95 % de 0,71 à 3,60.
+
+#figure(image("../results/figures/calibration_selection.svg", width: 100%), caption: [Couverture des intervalles])
+
+La calibration spécifique au groupe sélectionné réduit les largeurs, mais sa couverture sur ce groupe tombe à 87,19 %. La proposition de recalibrer après sélection ne suffit donc pas à améliorer cette mesure dans notre expérience.
+
+Ce résultat dépend de l'échelle. Une largeur constante se comporte différemment, ce que montrent les 64 lignes du tableau de calibration. Le désaccord tend déjà à élargir les intervalles sur les titres sélectionnés. Il serait incorrect de conclure que la sélection améliore toujours la couverture.
+
+L'inférence porte sur les écarts mensuels moyens, par blocs circulaires appariés de 6, 12 et 24 mois et 4 999 répétitions. Elle ne considère pas les centaines d'obligations d'un même mois comme des observations indépendantes. La comparaison de couverture principale de l'extension est fixée dans #raw("selection_protocol.json"). Les autres niveaux et échelles restent descriptifs.
+
+=== Réduire les positions quand l'incertitude augmente
+
+Les trois filtres conservent les mêmes titres que le classement par prévision moyenne. Ils modifient seulement la part du capital qui leur est consacrée, selon la volatilité, l'erreur passée ou la largeur moyenne de l'intervalle calibré sur les titres sélectionnés.
+
+Le multiplicateur est la médiane de l'indicateur durant les 24 mois précédents divisée par sa valeur actuelle. Il reste entre 0,25 et un. Chaque flux filtré reçoit ensuite le même budget annuel de risque de 6 %, estimé sur ses propres 24 mois passés et plafonné à 100 % du capital. Les liquidités rapportent le taux sans risque et les frais suivent le registre exact de l'étude principale.
+
+Le recalibrage du budget de risque peut compenser une partie du filtre. Il ne faut donc pas lire ces stratégies comme une réduction permanente de l'exposition par rapport au repère. Leurs risques et leurs expositions réellement obtenus sont publiés.
+
+#table(
+  columns: 4,
+  stroke: (x, y) => if y == 0 { (bottom: 0.6pt) } else { none },
+  align: left + top,
+  inset: 5pt,
+    [*Règle*],
+    [*Part risquée moyenne (%)*],
+    [*Risque annuel (%)*],
+    [*Équivalent certain annuel (%)*],
+    [Filtre d’erreurs passées],
+    [83,66],
+    [6,43],
+    [1,67],
+    [Sélection sans filtre],
+    [81,80],
+    [6,79],
+    [2,67],
+    [Filtre de largeur des intervalles],
+    [84,09],
+    [6,55],
+    [1,66],
+    [Filtre de volatilité],
+    [83,72],
+    [6,47],
+    [1,41],
+)
+
+Le tableau utilise 25 points de base de frais par montant acheté ou vendu. Dans cette configuration, chacun des trois filtres donne un équivalent certain inférieur à la sélection sans filtre. Cette dernière retrouve exactement le chemin du classement moyen de l'étude principale, ce qui vérifie la cohérence des deux expériences.
+
+#figure(image("../results/figures/filtres_selection.svg", width: 100%), caption: [Écarts des filtres après frais et incertitude])
+
+=== Un repère explicite issu d'Uncertainty-Aware Asset Pricing
+
+Liu, Luo, Wang et Zhang proposent un classement qui utilise les bornes d'intervalles. Nous reprenons le signe de leur règle longue, la moyenne prévue *plus* un quantile des erreurs absolues propres au titre. Le quantile à 5 % n'est pas une fourchette à 95 % et n'est pas remplacé par celle-ci.
+
+Notre adaptation calcule les quantiles à 1, 5 et 10 % sur les 36 mois passés, avec au moins douze observations. Elle utilise les prévisions obligataires déjà publiées, choisit le décile supérieur et conserve uniquement des positions acheteuses. Le repère moyen choisit le même décile dans le même univers. Les deux règles passent par le même budget de risque.
+
+#table(
+  columns: 3,
+  stroke: (x, y) => if y == 0 { (bottom: 0.6pt) } else { none },
+  align: left + top,
+  inset: 5pt,
+    [*Classement du décile acheté*],
+    [*Risque annuel (%)*],
+    [*Équivalent certain annuel (%)*],
+    [Prévision moyenne],
+    [7,42],
+    [2,94],
+    [Moyenne + quantile à 1 %],
+    [7,73],
+    [2,32],
+    [Moyenne + quantile à 5 %],
+    [7,84],
+    [2,16],
+    [Moyenne + quantile à 10 %],
+    [7,96],
+    [1,62],
+)
+
+Les colonnes utilisent 25 points de base de frais. Ces variantes reprennent le noyau du classement, mais pas l'échantillon d'actions, la validation longue ou le portefeuille long-court de l'article. Elles ne sont donc pas une réplication de ses performances. Leur présence empêche de présenter comme nouvelle une utilisation des bornes déjà proposée dans la littérature.
+
+=== Vérification et portée de l'extension
+
+Les tests contrôlent les quantiles pondérés sur une distribution à réponse connue, les dates admises dans la calibration et le signe du classement de référence. La vérification recalcule la couverture à partir des moyennes mensuelles et les performances depuis les registres de rendements. Les calculs SQL et le classeur fournissent une autre lecture des mêmes observations.
+
+Le résultat établi reste limité. Dans l'échelle principale fondée sur le désaccord, les titres sélectionnés sont mieux couverts que l'ensemble. Une calibration spécifique les couvre moins bien. Les filtres d'exposition testés ne montrent pas d'amélioration économique. Une nouvelle période serait nécessaire pour évaluer une règle modifiée à la lumière de ces résultats.
+
+*Extension abstract.* We calibrate empirical return intervals using past out-of-time forecast errors and compare coverage before and after selecting the highest-forecast bonds. Under disagreement scaling, selected bonds are better covered than the full universe. Calibration restricted to historically selected bonds narrows the intervals but reduces their realized coverage. Exposure filters and an adapted uncertainty-aware upper-bound sort do not establish a new economic advantage. The extension is exploratory on the previously examined historical sample.
+
+Référence complémentaire. Liu, Luo, Wang et Zhang (2026). _Uncertainty-Aware Asset Pricing_. Version du 2 janvier. #link("https://arxiv.org/html/2601.00593v1")[Texte intégral].
 
 == Références
 

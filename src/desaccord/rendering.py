@@ -126,7 +126,7 @@ def compile_article(repo: str) -> None:
     source = GABARIT.format(
         titre=chaine(document.titre),
         titre_affiche=ligne(document.titre),
-        pied="Document de recherche · Version 1.0",
+        pied="Document de recherche · Version 1.1",
         date="10 septembre 2026",
         depot=f"https://github.com/Guilou001/{repo}",
         depot_court=f"Guilou001/{repo}",
@@ -135,6 +135,12 @@ def compile_article(repo: str) -> None:
     source = source.replace(
         'font: ("Helvetica", "Arial", "DejaVu Sans"), size: 10pt',
         'font: ("Libertinus Serif", "Times New Roman", "DejaVu Serif"), size: 10.5pt',
+    )
+    source = source.replace(
+        "#show table: it => block(above:", "#show table: it => block(breakable: false, above:"
+    )
+    source = source.replace(
+        'text(size: 18pt, weight: "bold")', 'text(size: 18pt, weight: "bold", hyphenate: false)'
     )
     source = "#set figure.caption(separator: [. ])\n" + source
     p = Path("rapport")

@@ -230,6 +230,68 @@ Le SQL, les tests, toutes les variantes prévues et les résultats mensuels des 
 
 L'assistance d'IA a servi au code et à la rédaction. Les contrôles indépendants sont documentés. Le document n'a pas été évalué par les pairs.
 
+## Extension de septembre 2026 — Les intervalles restent-ils valables après sélection ?
+
+L'étude principale montre qu'une information sur les erreurs ne garantit pas une meilleure sélection. L'extension examine une autre utilisation du désaccord. Peut-il servir à construire des intervalles prédictifs fiables pour les titres effectivement achetés ? Une couverture globale correcte pourrait cacher une couverture différente dans le groupe choisi.
+
+Le protocole est fixé avant les calculs de cette extension, mais la période avait déjà été examinée dans l'étude principale. Il s'agit donc d'une analyse exploratoire, sans nouvelle période indépendante. Le rendement cible, les six prévisions publiées et les conditions d'admissibilité restent les mêmes.
+
+### Construire les fourchettes avec le passé disponible
+
+Chaque intervalle est centré sur la moyenne des six prévisions. Sa demi-largeur est le produit d'un quantile historique d'erreur normalisée et d'une échelle courante. Nous comparons une échelle constante, le désaccord, l'erreur absolue passée et la volatilité passée. Les échelles variables ont un plancher de 0,0001 en rendement décimal.
+
+La calibration utilise les 24 mois précédents, avec au moins douze mois disponibles. Chaque mois reçoit le même poids. À l'intérieur d'un mois, les obligations se partagent ce poids. Les niveaux annoncés sont 50, 80, 90 et 95 %. Le quantile pondéré est une statistique d'ordre empirique, pas une garantie conforme de couverture finie.
+
+Deux ensembles de calibration sont comparés. Le premier emploie tous les titres admissibles. Le second utilise les titres qui avaient été sélectionnés à leur propre date historique, dans le quintile supérieur des prévisions moyennes. Aucun classement n'est refait avec une prévision future. Les deux calibrations sont ensuite évaluées sur l'univers et sur les titres actuellement sélectionnés.
+
+Ces fourchettes concernent le rendement qui sera réalisé. Elles ne sont pas des intervalles de confiance sur le rendement moyen attendu. La dépendance des obligations et les changements de distribution empêchent d'invoquer automatiquement une garantie d'échangeabilité.
+
+### Le résultat contredit l'hypothèse de sous-couverture après sélection
+
+Avec une largeur liée au désaccord et une calibration générale, la couverture annoncée à 90 % est réalisée à {{coverage_all}} % sur tous les titres. Elle atteint {{coverage_selected}} % dans le quintile sélectionné. L'écart sélection moins univers vaut {{coverage_gap}} points de pourcentage, avec un intervalle à 95 % de {{coverage_low}} à {{coverage_high}}.
+
+![Couverture des intervalles](results/figures/calibration_selection.png)
+
+La calibration spécifique au groupe sélectionné réduit les largeurs, mais sa couverture sur ce groupe tombe à {{coverage_recalibrated}} %. La proposition de recalibrer après sélection ne suffit donc pas à améliorer cette mesure dans notre expérience.
+
+Ce résultat dépend de l'échelle. Une largeur constante se comporte différemment, ce que montrent les 64 lignes du tableau de calibration. Le désaccord tend déjà à élargir les intervalles sur les titres sélectionnés. Il serait incorrect de conclure que la sélection améliore toujours la couverture.
+
+L'inférence porte sur les écarts mensuels moyens, par blocs circulaires appariés de 6, 12 et 24 mois et 4 999 répétitions. Elle ne considère pas les centaines d'obligations d'un même mois comme des observations indépendantes. La comparaison de couverture principale de l'extension est fixée dans `selection_protocol.json`. Les autres niveaux et échelles restent descriptifs.
+
+### Réduire les positions quand l'incertitude augmente
+
+Les trois filtres conservent les mêmes titres que le classement par prévision moyenne. Ils modifient seulement la part du capital qui leur est consacrée, selon la volatilité, l'erreur passée ou la largeur moyenne de l'intervalle calibré sur les titres sélectionnés.
+
+Le multiplicateur est la médiane de l'indicateur durant les 24 mois précédents divisée par sa valeur actuelle. Il reste entre 0,25 et un. Chaque flux filtré reçoit ensuite le même budget annuel de risque de 6 %, estimé sur ses propres 24 mois passés et plafonné à 100 % du capital. Les liquidités rapportent le taux sans risque et les frais suivent le registre exact de l'étude principale.
+
+Le recalibrage du budget de risque peut compenser une partie du filtre. Il ne faut donc pas lire ces stratégies comme une réduction permanente de l'exposition par rapport au repère. Leurs risques et leurs expositions réellement obtenus sont publiés.
+
+{{filters_table}}
+
+Le tableau utilise 25 points de base de frais par montant acheté ou vendu. Dans cette configuration, chacun des trois filtres donne un équivalent certain inférieur à la sélection sans filtre. Cette dernière retrouve exactement le chemin du classement moyen de l'étude principale, ce qui vérifie la cohérence des deux expériences.
+
+![Écarts des filtres après frais et incertitude](results/figures/filtres_selection.png)
+
+### Un repère explicite issu d'Uncertainty-Aware Asset Pricing
+
+Liu, Luo, Wang et Zhang proposent un classement qui utilise les bornes d'intervalles. Nous reprenons le signe de leur règle longue, la moyenne prévue **plus** un quantile des erreurs absolues propres au titre. Le quantile à 5 % n'est pas une fourchette à 95 % et n'est pas remplacé par celle-ci.
+
+Notre adaptation calcule les quantiles à 1, 5 et 10 % sur les 36 mois passés, avec au moins douze observations. Elle utilise les prévisions obligataires déjà publiées, choisit le décile supérieur et conserve uniquement des positions acheteuses. Le repère moyen choisit le même décile dans le même univers. Les deux règles passent par le même budget de risque.
+
+{{uas_table}}
+
+Les colonnes utilisent 25 points de base de frais. Ces variantes reprennent le noyau du classement, mais pas l'échantillon d'actions, la validation longue ou le portefeuille long-court de l'article. Elles ne sont donc pas une réplication de ses performances. Leur présence empêche de présenter comme nouvelle une utilisation des bornes déjà proposée dans la littérature.
+
+### Vérification et portée de l'extension
+
+Les tests contrôlent les quantiles pondérés sur une distribution à réponse connue, les dates admises dans la calibration et le signe du classement de référence. La vérification recalcule la couverture à partir des moyennes mensuelles et les performances depuis les registres de rendements. Les calculs SQL et le classeur fournissent une autre lecture des mêmes observations.
+
+Le résultat établi reste limité. Dans l'échelle principale fondée sur le désaccord, les titres sélectionnés sont mieux couverts que l'ensemble. Une calibration spécifique les couvre moins bien. Les filtres d'exposition testés ne montrent pas d'amélioration économique. Une nouvelle période serait nécessaire pour évaluer une règle modifiée à la lumière de ces résultats.
+
+**Extension abstract.** We calibrate empirical return intervals using past out-of-time forecast errors and compare coverage before and after selecting the highest-forecast bonds. Under disagreement scaling, selected bonds are better covered than the full universe. Calibration restricted to historically selected bonds narrows the intervals but reduces their realized coverage. Exposure filters and an adapted uncertainty-aware upper-bound sort do not establish a new economic advantage. The extension is exploratory on the previously examined historical sample.
+
+Référence complémentaire. Liu, Luo, Wang et Zhang (2026). *Uncertainty-Aware Asset Pricing*. Version du 2 janvier. [Texte intégral](https://arxiv.org/html/2601.00593v1).
+
 ## Références
 
 [1] Bali, T. G., Kelly, B., Mörke, M. et Rahman, J. 2026. Machine Forecast Disagreement. Review of Financial Studies. [DOI](https://doi.org/10.1093/rfs/hhag042).

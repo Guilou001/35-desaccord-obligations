@@ -27,6 +27,10 @@ def select(
     """Sélection dépendant uniquement des prévisions et des informations historiques."""
     if rule == "universe":
         return np.arange(len(frame))
+    if rule in ["uas001", "uas005", "uas010"]:
+        score = frame["mean"].to_numpy() + frame[rule].to_numpy()
+        k = max(1, int(np.floor(config["top_fraction"] * len(frame))))
+        return np.argsort(-score, kind="stable")[:k]
     mean = ranks(frame["mean"].to_numpy())
     penalty = np.zeros(len(frame))
     if rule in ["disagreement", "permuted"]:

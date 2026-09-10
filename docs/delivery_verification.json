@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "date": "2026-09-10",
+  "tests_passed": 11,
+  "article_pdf_source_hash_matches": true,
+  "local_readme_article_links_valid": true,
+  "workbook_formula_cells": 214,
+  "workbook_error_cells": 0,
+  "workbook_primary_comparison": 0.0220808549072254,
+  "workbook_file": "reports/selection.xlsx",
+  "workbook_sha256": "79a6529a520ca0abf2b5595aa168fc6463933641c60209d2f160c1c946c3b0ac",
+  "visual_review": "All article pages and both workbook sheets rendered and inspected. White figures, no page overflow, table headers kept with rows."
+}
