@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "gv-desaccord"
-version = "0.1.0"
+version = "1.0.0"
 description = "Mesurer quand le désaccord des modèles aide à choisir des obligations"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -14,7 +14,12 @@ dependencies = ["numpy>=2.0", "pandas>=3.0", "scipy>=1.14", "matplotlib>=3.9", "
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.12", "scikit-learn>=1.5", "pre-commit>=4"]
-report = ["typst>=0.14", "pypdf>=5", "pymupdf>=1.25"]
+report = [
+    "typst>=0.14",
+    "pypdf>=5",
+    "pymupdf>=1.25",
+    "gvf",
+]
 
 [project.scripts]
 desaccord = "desaccord.cli:app"
@@ -36,3 +41,6 @@ ignore = ["E501", "B008"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.uv.sources]
+gvf = { git = "https://github.com/Guilou001/gv-fintools", rev = "v0.4.1" }
